@@ -2,13 +2,12 @@
 from ftplib import FTP
 import ftplib, sys, re, socket, os
 
-#shuru_ip = input('input a ftp server ip : ')
 #ip = '192.168.163.129'
 patt = 'pwd|cwd|dir|retr|stor|rename|delete|mkd|rmd|help'#允许的命令
 
 length = len(sys.argv)
 if length != 2:#判断是否有参数
-	print('Parameter error! We need one parameters.')
+	print('Parameter error! We need one parameter.')
 	print('For example : '
 			+'python  '+sys.argv[0] +'  ip/hostname')
 else:
@@ -23,7 +22,6 @@ else:
 	try:#判断是否可连接
 		ftp = FTP(ip)
 		print('Connected to {}.'.format(ip))
-#		ftp.set_debuglevel(0)
 		resp = ''
 
 
@@ -87,21 +85,15 @@ else:
 					' rename(\'old\', \'new\')\n')
 			else:
 				if mingling_match is not None:
-					print(mingling)
-#					print(mingling_retr.group()) 
-#					print(mingling_rename_new.group()) 
+					#print(mingling)
+
 					if mingling == 'pwd':
 						print(ftp.pwd())
 					elif mingling == 'dir':
 						ftp.dir()
 					elif (mingling_match.group() == 'dir') and (mingling_dir is not None):
-#						print(mingling)
-#						print(mingling_dir.group())
-#						print(mingling_dir.group())
 						ftp.dir(mingling_dir.group())
 					elif (mingling_match.group() == 'cwd') and (mingling_cwd is not None):
-#						print(mingling)
-#						print(mingling_cwd.group())
 						ftp.cwd(mingling_cwd.group())
 					elif (mingling_match.group() == 'rename') and (mingling_rename_old is not None) and (mingling_rename_new is not None):
 						ftp.rename(mingling_rename_old.group(), mingling_rename_new.group())

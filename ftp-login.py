@@ -1,4 +1,5 @@
-#All I need is YOU  ,written in python3.3
+#All I need is YOU  ,written in python3.3(windows)
+#Usage: python example.py ip/hostname
 from ftplib import FTP
 import ftplib, sys, re, socket, os
 

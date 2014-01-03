@@ -2,7 +2,7 @@
 from ftplib import FTP
 import ftplib, sys, re, socket, os
 
-#shuru_ip = input('input a ftp server ip : ')
+
 #ip = '192.168.163.129'
 patt = 'pwd|cwd|dir|retr|stor|rename|delete|mkd|rmd|help'#允许的命令
 
@@ -71,11 +71,9 @@ else:
 			mingling_mkd = re.search(patt_path, mingling)
 			mingling_rmd = re.search(patt_path, mingling)
 			mingling_cwd = re.search(patt_path, mingling)
-#			patt_retr_stor = '(?<=\(\')\w+[\.\w+]{0,}'
 			mingling_retr = re.search(patt_path, mingling)
 			mingling_stor = re.search(patt_path, mingling)
-#			mingling_retrbinary = re.search(patt_path, mingling)
-#			mingling_storbinary = re.search(patt_path, mingling)
+
 			if (mingling_space == 'exit') or (mingling_space == 'quit') or (mingling_space == 'q'):
 				flag = False
 				print('it\'s going to exit...')
@@ -87,21 +85,13 @@ else:
 					' rename(\'old\', \'new\')\n')
 			else:
 				if mingling_match is not None:
-					print(mingling)
-#					print(mingling_retr.group()) 
-#					print(mingling_rename_new.group()) 
 					if mingling == 'pwd':
 						print(ftp.pwd())
 					elif mingling == 'dir':
 						ftp.dir()
 					elif (mingling_match.group() == 'dir') and (mingling_dir is not None):
-#						print(mingling)
-#						print(mingling_dir.group())
-#						print(mingling_dir.group())
 						ftp.dir(mingling_dir.group())
 					elif (mingling_match.group() == 'cwd') and (mingling_cwd is not None):
-#						print(mingling)
-#						print(mingling_cwd.group())
 						ftp.cwd(mingling_cwd.group())
 					elif (mingling_match.group() == 'rename') and (mingling_rename_old is not None) and (mingling_rename_new is not None):
 						ftp.rename(mingling_rename_old.group(), mingling_rename_new.group())
